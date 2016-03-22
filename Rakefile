@@ -2,7 +2,7 @@ require 'rake'
 require "sinatra/activerecord/rake"
 require ::File.expand_path('../config/environment', __FILE__)
 
-task :default => :nothing
+task default: :nothing
 
 desc "a task that does nothing"
 task "nothing" do

@@ -1,8 +1,7 @@
 [![Build Status](https://travis-ci.org/Terit/photographic-memory.svg)](https://travis-ci.org/Terit/photographic-memory)
 
-Photographic Memory
-==================
+Photographic Memory API
+=======================
 
-A memory match game using images pulled from Instagram.
-
-Search for a Hashtag and compete against the clock.
+API built to serve React version of Photographic Memory. A simple memory match
+game using Instagram photos.

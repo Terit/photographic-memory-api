@@ -15,7 +15,6 @@ configure do
     filename = File.basename(model_file).gsub('.rb', '')
     autoload ActiveSupport::Inflector.camelize(filename), model_file
   end
-
 end
 
 # configure :production do
@@ -25,9 +24,9 @@ end
 #     encoding: 'unicode',
 #     pool: 5,
 #     database: 'd2f13abuoe36ii',
-#     username: 
-#     password: 
-#     host: 
+#     username:
+#     password:
+#     host:
 #     port: 5432,
 #     min_messages: 'error'
 #   )

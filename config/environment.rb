@@ -6,10 +6,10 @@ require 'active_support/all'
 # Load Sinatra Framework (with AR)
 require 'sinatra'
 require 'sinatra/activerecord'
+require 'sinatra/cross_origin'
 
 require 'pry'
 require 'instagram'
-require 'gon-sinatra'
 
 APP_ROOT = Pathname.new(File.expand_path('../../', __FILE__))
 APP_NAME = APP_ROOT.basename.to_s
@@ -19,6 +19,8 @@ configure do
   set :root, APP_ROOT.to_path
   set :server, :puma
 
+  enable :cross_origin
+  
   enable :sessions
   set :session_secret, ENV['SESSION_KEY'] || 'lighthouselabssecret'
 
@@ -37,5 +39,3 @@ Instagram.configure do |config|
   # For secured endpoints only
   #config.client_ips = '<Comma separated list of IPs>'
 end
-
-Sinatra::register Gon::Sinatra

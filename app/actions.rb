@@ -1,13 +1,3 @@
-get "/" do
-  client = Instagram.client(:access_token => session[:access_token])
-  @links = []
-  for media_item in client.media_popular
-    @links << media_item.images.thumbnail.url
-  end
-  gon.links = @links[0..7]
-  erb :index
-end
-
 post '/leaderboard' do
   if params[:tag] == ''
     params[:tag] = 'popular'
@@ -22,28 +12,24 @@ get '/leaderboard' do
   erb :leaderboard
 end
 
-get "/search" do
-  redirect "/#{params[:search].gsub!(/#/,'')}"
-  # redirect "/#{params[:search]}"
+before do
+  @client = Instagram.client(access_token: session[:access_token])
 end
 
-get "/search" do
-  params[:search].gsub!(/#/,'')
-  client = Instagram.client(:access_token => session[:access_token])
-  @links = []
-  tags = client.tag_search("#{params[:tag]}")
-  if tags.length > 0
-    @tag = params[:tag]
-    for media_item in client.tag_recent_media(tags[0].name)
-      @links << media_item.images.thumbnail.url
-    end
-    unless @links.length > 7
-      redirect "/"
-    end
-  else
-    redirect "/"
-  end
-  gon.links = @links[0..7]
-  erb :index
+get '/api/images/popular' do
+  @links = @client.media_popular
+            .map(&:images)
+            .map(&:thumbnail)
+            .map(&:url)
+  @links.take(8).to_json
 end
 
+get '/api/images/:tag' do
+  tag = @client.tag_search(params[:tag]).first
+  redirect '/api/images/popular' if tag.blank?
+  @links = @client.tag_recent_media(tag[:name])
+            .map(&:images)
+            .map(&:thumbnail)
+            .map(&:url)
+  @links.take(8).to_json
+end
