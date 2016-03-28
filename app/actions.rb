@@ -1,4 +1,4 @@
-post '/api/leaderboard/:tag/:name/:score' do
+post '/api/leaderboard' do
   tag = params[:tag] || 'popular'
   Leader.create(name: params[:name], hashtag: tag, score: params[:score].to_i)
   Leader.where(hashtag: tag).order(score: :desc).limit(10).to_json
