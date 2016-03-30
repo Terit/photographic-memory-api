@@ -20,7 +20,7 @@ configure do
   set :server, :puma
 
   enable :cross_origin
-  set :allow_origin, ENV['REACT_SERVER']
+  # set :allow_origin, ENV['REACT_SERVER']
   set :allow_methods, [:get, :post, :options]
 
   enable :sessions
