@@ -10,6 +10,7 @@ gem 'sinatra-activerecord'
 gem "sinatra-cross_origin", "~> 0.3.1"
 
 gem 'puma'
+gem 'pg'
 
 gem 'instagram'
 
@@ -20,6 +21,4 @@ group :development, :test do
   gem 'sqlite3'
 end
 
-group :production do
-  gem 'pg'
-end
+
