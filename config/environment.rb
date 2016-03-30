@@ -20,7 +20,7 @@ configure do
   set :server, :puma
 
   enable :cross_origin
-  set :allow_origin, 'http://localhost:3000'
+  set :allow_origin, ENV['REACT_SERVER']
   set :allow_methods, [:get, :post, :options]
 
   enable :sessions
@@ -38,6 +38,4 @@ require APP_ROOT.join('app', 'actions')
 Instagram.configure do |config|
   config.client_id = "9da886f5f068407d9239abb2ae46cda2"
   config.client_secret = "ab530693873a4010bf5f9067ee775f3f"
-  # For secured endpoints only
-  #config.client_ips = '<Comma separated list of IPs>'
 end
