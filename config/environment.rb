@@ -20,7 +20,9 @@ configure do
   set :server, :puma
 
   enable :cross_origin
-  
+  set :allow_origin, 'http://localhost:3000'
+  set :allow_methods, [:get, :post, :options]
+
   enable :sessions
   set :session_secret, ENV['SESSION_KEY'] || 'lighthouselabssecret'
 
