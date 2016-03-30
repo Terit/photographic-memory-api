@@ -8,7 +8,6 @@ require 'sinatra'
 require 'sinatra/activerecord'
 require 'sinatra/cross_origin'
 
-require 'pry'
 require 'instagram'
 
 APP_ROOT = Pathname.new(File.expand_path('../../', __FILE__))
