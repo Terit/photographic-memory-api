@@ -1,4 +1,4 @@
-
+# Allow preflight CORS headers to be set
 options "*" do
   response.headers["Allow"] = "HEAD,GET,PUT,POST,DELETE,OPTIONS"
 
@@ -10,8 +10,9 @@ end
 post '/api/leaderboard/new' do
   tag = params[:tag]
   puts params
-  Leader.create!(name: params[:name], hashtag: tag, score: params[:score].to_i)
-  Leader.where(hashtag: tag).order(score: :desc).limit(10).to_json
+  leader = Leader.create(name: params[:name], hashtag: tag, score: params[:score].to_i)
+  leaders = Leader.where(hashtag: tag).order(score: :desc).pluck(:id)
+  { rank: (leaders.index(leader.id) + 1) }.to_json
 end
 
 get '/api/leaderboard/:tag' do
