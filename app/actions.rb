@@ -8,7 +8,8 @@ options "*" do
 end
 
 post '/api/leaderboard/new' do
-  tag = params[:tag] || 'popular'
+  tag = params[:tag]
+  puts params[:tag]
   leader = Leader.create(name: params[:name], hashtag: tag, score: params[:score].to_i)
   leaders = Leader.where(hashtag: tag).order(score: :desc).pluck(:id)
   { rank: (leaders.index(leader.id) + 1) }.to_json
