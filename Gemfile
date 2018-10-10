@@ -7,7 +7,7 @@ gem 'activesupport'
 gem 'sinatra'
 gem 'sinatra-contrib'
 gem 'sinatra-activerecord'
-gem "sinatra-cross_origin", "~> 0.3.1"
+gem "sinatra-cross_origin", "~> 0.4.0"
 
 gem 'puma'
 gem 'pg'
